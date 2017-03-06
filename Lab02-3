@@ -1,0 +1,108 @@
+const byte startPin = 2;
+const byte endPin = 9;
+const byte button = 13;
+
+void setup() 
+{
+			// 將每個 Pin 設定成輸出
+	for (byte i = startPin; i<= endPin; i++) 
+	{
+		pinMode(i, OUTPUT);
+	}
+	pinMode(button, INPUT);
+}
+void loop()
+{
+	byte i,j;
+	byte lightPin = startPin;
+	boolean val = digitalRead(button);
+	
+	if(!val)
+	{
+		for (i=startPin; i<= endPin; i++) 
+			digitalWrite(i,LOW);
+	
+		for(i=startPin; i<= endPin; i++)
+		{
+			digitalWrite(lightPin, HIGH);
+			delay(100);
+			digitalWrite(lightPin, LOW);
+			
+			if (lightPin < endPin) 
+				lightPin ++;
+			else 
+				lightPin = endPin;
+
+			delay(100);
+		}
+		
+		for(i=endPin; i>= startPin; i--)
+		{
+			digitalWrite(lightPin, HIGH);
+			delay(100);
+			digitalWrite(lightPin, LOW);
+		
+			if (lightPin > startPin) 
+				lightPin --;
+
+			else 
+				lightPin = startPin;
+
+			delay(100);
+		}
+	}
+	
+	else
+	{
+		delay(600);
+		for(j=0;j<2;j++)
+		{
+			for (i=startPin; i<= endPin; i++) 
+				digitalWrite(i,HIGH);
+			delay(1000);
+			
+			for (i=endPin; i>=startPin; i--) 
+				digitalWrite(i,LOW);
+			delay(1000);
+		}
+			
+		for(i=startPin; i<= endPin; i++)
+		{
+			digitalWrite(lightPin, HIGH);
+			delay(100);
+			digitalWrite(lightPin, LOW);
+			
+			if (lightPin < endPin) 
+				lightPin ++;
+			else 
+				lightPin = endPin;
+				
+			delay(100);
+		}
+	
+		for(j=0;j<2;j++)
+		{
+			for (i=startPin; i<= endPin; i++) 
+				digitalWrite(i,HIGH);
+			delay(1000);
+			
+			for (i=endPin; i>=startPin; i--) 
+				digitalWrite(i,LOW);
+			delay(1000);
+		}
+	
+		for(i=endPin; i>= startPin; i--)
+		{
+			digitalWrite(lightPin, HIGH);
+			delay(100);
+			digitalWrite(lightPin, LOW);
+			
+			if (lightPin > startPin) 
+				lightPin --;
+			else 
+				lightPin = startPin;
+
+			delay(100);
+		}
+	}
+}
